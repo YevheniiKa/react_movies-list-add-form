@@ -31,6 +31,9 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
     setCount(c => c + 1);
   };
 
+  const isFormValid =
+    title.trim() && imgUrl.trim() && imdbUrl.trim() && imdbId.trim();
+
   return (
     <form onSubmit={handleSubmit} className="NewMovie" key={count}>
       <h2 className="title">Add a movie</h2>
@@ -78,24 +81,14 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
 
       <div className="field is-grouped">
         <div className="control">
-          {title && imgUrl && imdbUrl && imdbId ? (
-            <button
-              type="submit"
-              data-cy="submit-button"
-              className="button is-link"
-            >
-              Add
-            </button>
-          ) : (
-            <button
-              type="submit"
-              data-cy="submit-button"
-              className="button is-link"
-              disabled
-            >
-              Add
-            </button>
-          )}
+          <button
+            type="submit"
+            data-cy="submit-button"
+            className="button is-link"
+            disabled={!isFormValid}
+          >
+            Add
+          </button>
         </div>
       </div>
     </form>
